@@ -1,16 +1,17 @@
 import { rest } from 'msw'
+import json from './openapi.json'
+
+const paths = Object.keys(json.paths);
+console.log("paths", paths);
 
 export const handlers = [
-  rest.post('/login', (req, res, ctx) => {
-    const { username } = req.body
-
+  rest.post(paths[0], (req, res, ctx) => {
+    const name = json.paths[paths[0]].get.responses["200"].content["application/json"].examples[0].name
     return res(
-      ctx.json({
-        id: 'f79e82e8-c34a-4dc7-a49e-9fadc0979fda',
-        username,
-        firstName: 'John',
-        lastName: 'Maverick',
-      }),
+      ctx.json([
+        { id: "", name, tag: "" },
+        { id: "", name, tag: "" },
+      ]),
     )
   }),
 ]

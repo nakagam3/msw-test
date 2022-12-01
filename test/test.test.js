@@ -4,14 +4,11 @@ describe('MSW test', () => {
     });
 
     it('test', async () => {
-      fetch('/login', {
-        method: 'POST',
-        body: JSON.stringify({
-          username: "kid",
-        }),
+      fetch('/pets', {
+        method: 'GET',
       })
       .then((res) => {
-        expect(res.json.id).toBe("f79e82e8-c34a-4dc7-a49e-9fadc0979fda")
+        expect(res.json[0].name).toBe("pes")
       });
     });
 })
